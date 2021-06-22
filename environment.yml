@@ -167,5 +167,5 @@ dependencies:
 - pytorch=1.5.1=py3.6_cuda9.2.148_cudnn7.6.3_0
 - torchvision=0.6.1=py36_cu92
 - pytorch3d=0.2.5=py36_cu92_pyt151
-prefix: /research/prip-shiyichu/app/anaconda2/envs/pytorch
+prefix: ~/anaconda3/envs/lifted_gan
 

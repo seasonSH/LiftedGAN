@@ -265,7 +265,12 @@ class LiftedGAN(object):
         silhouette = 2*silhouette.unsqueeze(1)
         silhouette = (silhouette > 0.5).float()
 
-        return recon_im, canon_im, canon_normal, canon_shading, silhouette, recon_depth.detach()
+
+        margin = (self.max_depth - self.min_depth) /2
+        recon_im_mask = (recon_depth.detach() < self.max_depth+margin).float()  # invalid border pixels have been clamped at max_depth+margin
+        recon_im_mask = recon_im_mask.unsqueeze(1)
+
+        return recon_im, canon_im, canon_normal, canon_shading, recon_im_mask, recon_depth.detach()
 
 
     def perturb(self, neutral_style, light, view):
@@ -329,10 +334,11 @@ class LiftedGAN(object):
 
 
         ### Rendering
-        recon_im, canon_im, canon_normal, canon_shading, silhouette, recon_depth = \
+        recon_im, canon_im, canon_normal, canon_shading, recon_im_mask, recon_depth = \
                 self.render(canon_depth, canon_albedo, canon_light, view, trans_map=trans_map)
-        recon_im_flip, canon_im_flip, _, canon_shading_flip, silhouette_flip, recon_depth_flip = \
+        recon_im_flip, canon_im_flip, _, canon_shading_flip, recon_im_mask_flip, recon_depth_flip = \
                 self.render(canon_depth.flip(2), canon_albedo.flip(3), canon_light, view, trans_map=trans_map)
+        recon_im_mask_both = recon_im_mask * recon_im_mask_flip
 
         summary['image']['depth/recon_depth'] = make_grid(recon_depth[:b0].unsqueeze(1), nrow=nrow, normalize=True)
         summary['image']['depth/canon_normal'] = make_grid(canon_normal[:b0].permute(0,3,1,2), nrow=nrow, normalize=True)
@@ -360,7 +366,7 @@ class LiftedGAN(object):
         # Symmetric Image Reconstruction Loss
         if self.config.lam_rec > 0:
             loss_rec = self.symmetric_image_loss(recon_im, recon_im_flip, input_im,
-                lam_perc=self.config.lam_perc, lam_flip=self.config.lam_flip)
+                lam_perc=self.config.lam_perc, lam_flip=self.config.lam_flip, mask=recon_im_mask_both)
             loss_total += self.config.lam_rec * loss_rec
             watchlist['loss_rec'] = loss_rec.item()
 
@@ -506,9 +512,9 @@ class LiftedGAN(object):
                 input_im = input_batch
 
             if render:
-                recon_im, canon_im, canon_normal, canon_shading, silhouette, recon_depth = \
+                recon_im, canon_im, canon_normal, canon_shading, recon_im_mask, recon_depth = \
                     self.render(canon_depth, canon_albedo, canon_light, view, trans_map=trans_map)
-                keys += ['recon_im', 'canon_im', 'canon_normal', 'canon_shading', 'silhouette', 'recon_depth']
+                keys += ['recon_im', 'canon_im', 'canon_normal', 'canon_shading', 'recon_im_mask', 'recon_depth']
 
             if recon_normal:
                 recon_normal = self.get_recon_normal(canon_normal, canon_depth, view)

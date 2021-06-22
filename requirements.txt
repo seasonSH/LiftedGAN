@@ -1,0 +1,9 @@
+torch==1.5.1
+torchvision==0.6.1
+pytorch3d==0.2.5
+tqdm==4.15.0
+lmdb==0.98
+pillow==5.4.1
+imageio==2.9.0
+tensorboardX==2.1
+
