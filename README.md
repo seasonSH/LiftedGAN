@@ -3,7 +3,7 @@
 <a href="https://arxiv.org/abs/2011.13126"><img src="https://img.shields.io/badge/arXiv-2011.13126-b31b1b.svg"></a>
 <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg"></a>
 
-Oficial implementation of paper "Lifting 2D StyleGAN for 3D-Aware Face Generation".
+Official implementation of paper "Lifting 2D StyleGAN for 3D-Aware Face Generation".
 
 ## Requirements
 You can create the conda environment by using `conda env create -f environment.yml`
@@ -48,7 +48,7 @@ You might skip this step if you are using our pre-calculated statistics file ([l
 python tools/test_fid.py /path/to/the/checkpoint --inception /path/to/the/inception/file
 ```
 
-## Ackowledgment
+## Acknowledgment
 Part of this code is based on Wu's [Unsup3D](https://github.com/elliottwu/unsup3d) and Rosinality's [StyleGAN2-Pytorch](https://github.com/rosinality/stylegan2-pytorch).
 
 
