@@ -2,6 +2,8 @@
 
 <a href="https://arxiv.org/abs/2011.13126"><img src="https://img.shields.io/badge/arXiv-2011.13126-b31b1b.svg"></a>
 <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg"></a>
+<a href="https://pytorch3d.org/"><img src="https://img.shields.io/badge/Pytorch-1.5.1-44bb44.svg"></a>
+<a href="https://pytorch3d.org/"><img src="https://img.shields.io/badge/Pytorch3D-0.2.5-33aa33.svg"></a>
 
 Official implementation of paper "Lifting 2D StyleGAN for 3D-Aware Face Generation".
 
