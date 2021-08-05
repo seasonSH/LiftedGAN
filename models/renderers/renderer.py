@@ -61,7 +61,7 @@ class Renderer(torch.nn.Module):
 
 
         # Initialize an OpenGL perspective camera.
-        R = look_at_rotation(((0,0,0),), at=((0, 0, 1),), up=((0, -1, 0),))
+        R = look_at_rotation(((0,0,0),), at=((0, 0, 1),), up=((0, -1, 0),), device=self.device)
         cameras = OpenGLPerspectiveCameras(device=self.device, fov=self.fov, R=R)
         lights = DirectionalLights(
             ambient_color=((1.0, 1.0, 1.0),), diffuse_color=((0.0, 0.0, 0.0),),
