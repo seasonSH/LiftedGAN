@@ -168,3 +168,4 @@ dependencies:
 - torchvision=0.6.1=py36_cu92
 - pytorch3d=0.2.5=py36_cu92_pyt151
 prefix: ~/anaconda3/envs/lifted_gan
+
