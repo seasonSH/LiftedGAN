@@ -12,7 +12,7 @@ You can create the conda environment by using `conda env create -f environment.y
 
 ## Training
 ### Training from pre-trained StyleGAN2
-Download our pre-trained StyleGAN and face embedding network from [here](https://drive.google.com/file/d/1qVoWu_fps17iTzYptwuN3ptgYeCpIl2e/view?usp=sharing). Unzip them into the `pretrained/` folder. Then you can start training by:
+Download our pre-trained StyleGAN and face embedding network from [here](https://drive.google.com/file/d/1qVoWu_fps17iTzYptwuN3ptgYeCpIl2e/view?usp=sharing) for training. Unzip them into the `pretrained/` folder. Then you can start training by:
 ```sh
 python tools/train.py config/ffhq_256.py
 ```
@@ -23,6 +23,8 @@ We use a re-cropped version of FFHQ to fit the style of our face embedding netwo
 To train a StyleGAN2 from you own dataset, check the content under [`stylegan2-pytorch`](https://github.com/seasonSH/LiftedGAN/tree/main/stylegan2-pytorch) folder. After training a StyleGAN2, you can lift it using our training code. Note that our method might not apply to other kind of images, if they are very different from human faces.
 
 ## Testing
+### Pre-trained Models: 
+[Google Drive](https://drive.google.com/file/d/1-44Eivt7GHINkX6zox89HHttujYWThz2/view?usp=sharing)
 ### Sampling random faces
 You can generate random samples from a lifted gan by running:
 ```sh
